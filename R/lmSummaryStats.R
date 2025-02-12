@@ -4,7 +4,7 @@
 #'
 #' Get the TSS, MSS, and RSS for a linear model.
 #'
-#' @param lm
+#' @param lm The linear model to analyze.
 #'
 #' @returns a dataframe with
 #' \itemize{

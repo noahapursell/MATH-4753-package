@@ -7,7 +7,7 @@
 lmSummaryStats(lm)
 }
 \arguments{
-\item{lm}{}
+\item{lm}{The linear model to analyze.}
 }
 \value{
 a dataframe with
