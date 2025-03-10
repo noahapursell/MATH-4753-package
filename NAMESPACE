@@ -2,5 +2,6 @@
 
 export(lmSummaryStats)
 export(mybin)
+export(mycltb)
 export(myncurve)
 export(mysq)
