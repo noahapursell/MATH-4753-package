@@ -12,7 +12,10 @@
 #'  \item \code{MSS}
 #'  \item \code{RSS}
 #' }
+#'
+#'@importFrom stats fitted
 #' @export
+#'
 #'
 #' @examples
 #' df <- data.frame(

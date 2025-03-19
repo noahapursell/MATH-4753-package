@@ -9,6 +9,10 @@
 #'
 #' @returns A numeric vector with the probabilities of having i successes, for all values
 #' of i from 0 to n.
+#'
+#' @importFrom grDevices rainbow
+#' @importFrom graphics barplot hist
+#' @importFrom stats rbinom
 #' @export
 #'
 #' @examples
@@ -19,8 +23,8 @@ mybin = function(iter = 100,
   # make a matrix to hold the samples
   #initially filled with NA's
   sam.mat = matrix(NA,
-                   nr = n,
-                   nc = iter,
+                   nrow= n,
+                   ncol = iter,
                    byrow = TRUE)
   #Make a vector to hold the number of successes in each trial
   succ = c()

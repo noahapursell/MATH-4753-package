@@ -5,9 +5,11 @@
 #' @param n Sample size
 #' @param iter Number of iterations / samples to take in order to create a histogram of the distribution.
 #' @param p Probability of success of the binomial distribution
-#' @param ...
+#' @param ... extra arguments
 #'
 #' @returns w: a vector of the sample means.
+#'
+#' @importFrom stats dnorm
 #' @export
 #'
 #' @examples
@@ -17,7 +19,7 @@ mycltb = function(n, iter, p = 0.5, ...) {
   y = rbinom(n * iter, size = n, prob = p)
   ## Place these numbers into a matrix
   ## The columns will correspond to the iteration and the rows will equal the sample size n
-  data = matrix(y, nr = n, nc = iter, byrow = TRUE)
+  data = matrix(y, nrow = n, ncol = iter, byrow = TRUE)
   ## apply the function mean to the columns (2) of the matrix
   ## these are placed in a vector w
   w = apply(data, 2, mean)
@@ -45,8 +47,9 @@ mycltb = function(n, iter, p = 0.5, ...) {
   ## add a density curve made from the sample distribution
   #lines(density(w),col="Blue",lwd=3) # add a density plot
   ## Add a theoretical normal curve
+  f = function(x) dnorm(x, mean = n * p, sd = sqrt(p * (1 - p)))
   curve(
-    dnorm(x, mean = n * p, sd = sqrt(p * (1 - p))),
+    f,
     add = TRUE,
     col = "Red",
     lty = 2,
