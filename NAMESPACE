@@ -2,6 +2,7 @@
 
 export(lmSummaryStats)
 export(mybin)
+export(myboot2)
 export(mycltb)
 export(myncurve)
 export(mysq)
