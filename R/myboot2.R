@@ -15,6 +15,10 @@
 #'   \item{x}{The original data sample used for bootstrapping.}
 #'   \item{xstat}{A numeric vector of bootstrap sample statistics, one for each iteration.}
 #' }
+#'
+#' @importFrom graphics segments
+#' @importFrom stats quantile
+#'
 #' @export
 #'
 #' @examples
@@ -27,7 +31,7 @@ myboot2<-function(iter=10000,x, fun = "mean", alpha = 0.05, ...) {
   y = sample(x, n * iter, replace = TRUE) #A
 
   # Make a matrix with all the resampled values
-  rs.mat = matrix(y, nr = n, nc = iter, byrow = TRUE)
+  rs.mat = matrix(y, nrow = n, ncol = iter, byrow = TRUE)
   xstat = apply(rs.mat, 2, fun)
   # xstat is a vector and will have iter values in it
   ci = quantile(xstat, c(alpha / 2, 1 - alpha / 2)) #B
@@ -42,8 +46,8 @@ myboot2<-function(iter=10000,x, fun = "mean", alpha = 0.05, ...) {
 
   #mat will be a matrix that contains the data, this is done so that I can use apply()
   mat = matrix(x,
-               nr = length(x),
-               nc = 1,
+               nrow = length(x),
+               ncol = 1,
                byrow = TRUE)
 
   #pte is the point estimate
