@@ -13,7 +13,7 @@ mycltb(n, iter, p = 0.5, ...)
 
 \item{p}{Probability of success of the binomial distribution}
 
-\item{...}{}
+\item{...}{extra arguments}
 }
 \value{
 w: a vector of the sample means.
