@@ -1,0 +1,157 @@
+---
+title: "What the Package Does"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{What the Package Does}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MATH4753Noah2025)
+```
+
+# Introduction
+
+# Functions
+
+The `lmSummaryStats()` function calculates three key statistics from a linear model:
+
+- **TSS**: Total Sum of Squares
+- **MSS**: Model Sum of Squares
+- **RSS**: Residual Sum of Squares
+
+Example:
+
+```{r lm-example}
+# Create a sample dataset
+set.seed(123)
+df <- data.frame(
+  x = rnorm(100, mean = 50, sd = 10),
+  y = 5 + 2 * rnorm(100, mean = 50, sd = 10) + rnorm(100, mean = 0, sd = 5)
+)
+# Fit a linear model
+model <- lm(y ~ x, data = df)
+
+# Get summary stats
+lmSummaryStats(model)
+```
+
+This will return a list of the TSS, MSS, and RSS of the linear model. 
+
+## mybin
+
+The `mybin()` function creates a plot and returns a table of probabilities of getting i successes out of n trials with a specified probability of success using a simulation. 
+
+Example:
+
+```{r}
+mybin(10000, 10, 0.8)
+```
+
+This will create a plot of the number of expected successes in the binomial solution, and print these values to the console.
+
+## myboot2
+
+The `myboot2()` function will use bootstrapping to find a confidence interval for a statistic using a random sample. 
+
+Example:
+
+```{r}
+myboot2(iter=1000, x=runif(20, 1, 10), fun="mean", alpha=0.05)
+```
+
+This will plot a histogram of the bootstrap samples, show the bootstrap confidence intervals and expected value, and returns the values from each of the simulations. 
+
+## mycltb
+
+The `mycltb()` function uses the central limit theorem to plot the distribution of the mean of samples of the binomial distribution.
+
+Example:
+
+```{r}
+mycltb(n=10, iter=10000, p=0.3)
+```
+
+This will plot a histogram of the binomial outputs along with a line representing the binomial distribution, to show how well the two distributions match.
+
+## mymaxlik
+
+The `mymaxlik()` function will use a grid approximation to estimate the parameter that maximizes the log-likelihood function "lfun".
+
+Example:
+
+```{r}
+lfun <- function(x, p) {
+  dbinom(x,
+         size = 20,
+         prob = p,
+         log = TRUE)
+}
+
+# Example data
+x <- c(3, 3, 4, 3, 4, 5, 5, 4)
+
+# Find the maximum likelihood
+mymaxlik(lfun, x, seq(
+  from = 0,
+  to = 1,
+  length.out = 100
+))
+```
+
+In this example, we created our log function, some sample data, and ran the function. The function will output a plot of the log likelihood as a function of the parameter, and show which value on the grid maximizes the log likelihood. 
+
+## myncurve
+
+The `myncurve()` function plots a normal curve and gives the probability of a sample being less than a given value, `a`.
+
+Example
+
+```{r}
+myncurve(10, 4, 6)
+```
+
+The function will output a graph of the normal distribution, along with a colored region that and the probability that the output of the distribution is less than this value. It will also returns the mean, standard deviation, and probability as a list.
+
+## mysq
+
+The `mysq()` function takes in a vector of numbers and returns a new vector where each entry is the square of the input entry.
+
+Example:
+
+```{r}
+mysq(1:10)
+```
+
+Here, the function will returns a new vector containing the first 10 squares. 
+
+## ntickets
+
+The `ntickets()` function will determine the number of tickets to sell with a specified success rate, total number of seats, and overbooking chance tolerance. 
+
+Example:
+
+```{r}
+ntickets(N=100, gamma=0.1, p=0.9)
+```
+
+The function outputs a graph of the object function vs n using a binomial distribution as well as when using a normal approximation. It also returns a list that includes the number of tickets to sell based on the binomial, based on the normal approximation, the number of seats available, the probability of a ticket buyer actually showing up to the flight, and the acceptable probability of overbooking. 
+
+# Datasets
+
+## fire
+
+The fire dataset includes 15 entries, where each entry records a property's distance to the closest fire station (in miles) and the amount of damage that property received in a fire (in thousands of dollars).
+
+```{r}
+fire
+```
+
